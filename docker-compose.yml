@@ -1,14 +1,32 @@
 version: '3'
 services:
+  # available by: http://localhost:18080/nifi-registry
+  nifi-registry:
+    image: apache/nifi-registry:latest
+    container_name: nifi-registry
+    restart: unless-stopped
+    ports:
+      - "18080:18080"
+    environment:
+      LOG_LEVEL: INFO
+      NIFI_REGISTRY_DB_DIR: /opt/nifi-registry/database
+      NIFI_REGISTRY_FLOW_PROVIDER: file
+      NIFI_REGISTRY_FLOW_STORAGE_DIR: /opt/nifi-registry/flow_storage
+    volumes:
+      - ./nifi/nifi-registry/database:/opt/nifi-registry/database
+      - ./nifi/nifi-registry/flow_storage:/opt/nifi-registry/flow_storage
+
   nifi:
+    # available by: https://localhost:8443
     image: apache/nifi:latest
     container_name: nifi
     restart: unless-stopped
     network_mode: bridge
     ports:
       - 8443:8443/tcp
+    depends_on:
+      - nifi-registry
     volumes:
-      # mkdir /var/lib/nifi && chown -R 1000:1000 /var/lib/nifi
       - ./nifi/database_repository:/opt/nifi/nifi-current/database_repository
       - ./nifi/flowfile_repository:/opt/nifi/nifi-current/flowfile_repository
       - ./nifi/content_repository:/opt/nifi/nifi-current/content_repository
