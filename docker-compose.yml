@@ -6,7 +6,7 @@ services:
     container_name: nifi-registry
     restart: unless-stopped
     ports:
-      - "18080:18080"
+      - 18080:18080
     environment:
       LOG_LEVEL: INFO
       NIFI_REGISTRY_DB_DIR: /opt/nifi-registry/database
