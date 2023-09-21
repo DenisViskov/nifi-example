@@ -35,3 +35,7 @@ services:
     environment:
       SINGLE_USER_CREDENTIALS_USERNAME: admin
       SINGLE_USER_CREDENTIALS_PASSWORD: 1234567891011
+      DATABASE_DRIVER_CLASS_NAME: ru.datamart.prostore.jdbc.Driver
+      DATABASE_DRIVER_LOCATION: dtm-jdbc-6.3.0.jar
+      DATABASE_CONNECTION_URL_FROM: jdbc:prostore://d-mzrv15-nsud.rtmis.ru:19116/mzrv40stat02
+      DATABASE_CONNECTION_URL_TO: jdbc:prostore://d-mzrv15-nsud.rtmis.ru:19115/viskov_validation_statuses
