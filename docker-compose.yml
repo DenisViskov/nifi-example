@@ -17,7 +17,7 @@ services:
       - ./nifi/nifi-registry/flow_storage:/opt/nifi-registry/flow_storage
 
   nifi:
-    # available by: https://localhost:8443
+    # available by: https://localhost:8443/nifi
     image: apache/nifi:latest
     container_name: nifi
     restart: unless-stopped
